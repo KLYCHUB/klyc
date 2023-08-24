@@ -98,18 +98,25 @@ class AuthServices {
     return null;
   }
 
-  Future<UserCredential> signInWithMicrosoft() async {
-    final microsoftProvider = MicrosoftAuthProvider();
-    UserCredential userCredential;
+  Future<UserCredential?> signInWithMicrosoft() async {
+    try {
+      final microsoftProvider = MicrosoftAuthProvider();
 
-    if (kIsWeb) {
-      userCredential =
-          await FirebaseAuth.instance.signInWithPopup(microsoftProvider);
-    } else {
-      userCredential =
-          await FirebaseAuth.instance.signInWithProvider(microsoftProvider);
+      UserCredential userCredential;
+      if (kIsWeb) {
+        userCredential =
+            await FirebaseAuth.instance.signInWithPopup(microsoftProvider);
+      } else {
+        userCredential =
+            await FirebaseAuth.instance.signInWithProvider(microsoftProvider);
+      }
+
+      return userCredential;
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error during Microsoft sign-in: $e");
+      }
+      return null;
     }
-
-    return userCredential;
   }
 }

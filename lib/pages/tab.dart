@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:klyc/components/appbar_text.dart';
+import 'package:klyc/pages/admin_page.dart';
 import 'package:klyc/pages/custom_drawer.dart';
 import 'package:klyc/pages/my_favorite_page.dart';
 import 'package:klyc/pages/pages.dart';
@@ -60,7 +61,7 @@ class _TabPageState extends State<TabPage> with TickerProviderStateMixin {
         children: const [
           FirstPage(),
           FavoritePage(),
-          MoviePage(),
+          AdminPage(),
         ],
       ),
       drawer: const SafeArea(
@@ -83,21 +84,14 @@ class _TabPageState extends State<TabPage> with TickerProviderStateMixin {
   }
 }
 
-enum _MyTabViews { HOME, FAVORITE, MOVIE }
+enum _MyTabViews { HOME, FAVORITE, ADMIN }
 
 extension _MyTabViewExtension on _MyTabViews {}
 
 final tabIcons = {
   _MyTabViews.HOME: Icons.home,
-  _MyTabViews.MOVIE: Icons.movie_filter_sharp,
+  _MyTabViews.ADMIN: Icons.newspaper_outlined,
   _MyTabViews.FAVORITE: Icons.favorite,
 };
 
-class MoviePage extends StatelessWidget {
-  const MoviePage({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(color: Colors.black);
-  }
-}

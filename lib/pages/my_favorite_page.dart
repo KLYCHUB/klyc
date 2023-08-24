@@ -35,39 +35,46 @@ class _FavoritePageState extends State<FavoritePage> {
     return querySnapshot.docs;
   }
 
+  Future<bool> _onWillPop() async {
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: _refreshFavoritePosts,
-      child: FutureBuilder<List<QueryDocumentSnapshot>>(
-        future: _favoritePosts,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator(
-              color: Colors.transparent,
-            );
-          } else if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(
-              child: Text('NO FAVORITE POST FOUND.'),
-            );
-          } else {
-            final favoritePosts = snapshot.data!;
-            return ListView.builder(
-              itemCount: favoritePosts.length,
-              itemBuilder: (context, index) {
-                final post = favoritePosts[index];
-                return WallPost(
-                  message: post['Message'],
-                  user: post['UserEmail'],
-                  postId: post.id,
-                  likes: List<String>.from(post['Likes'] ?? []),
-                );
-              },
-            );
-          }
-        },
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: RefreshIndicator(
+        onRefresh: _refreshFavoritePosts,
+        child: FutureBuilder<List<QueryDocumentSnapshot>>(
+          future: _favoritePosts,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator(
+                color: Colors.transparent,
+              );
+            } else if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}');
+            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return const Center(
+                child: Text('NO FAVORITE POST FOUND.'),
+              );
+            } else {
+              final favoritePosts = snapshot.data!;
+              return ListView.builder(
+                itemCount: favoritePosts.length,
+                itemBuilder: (context, index) {
+                  final post = favoritePosts[index];
+                  return WallPost(
+                    message: post['Message'],
+                    user: post['UserEmail'],
+                    postId: post.id,
+                    likes: List<String>.from(post['Likes'] ?? []),
+                  );
+                },
+              );
+            }
+          },
+        ),
       ),
     );
   }

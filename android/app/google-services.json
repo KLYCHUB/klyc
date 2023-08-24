@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "1045104221935",
+    "project_id": "klyc-4525e",
+    "storage_bucket": "klyc-4525e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1045104221935:android:10f9cd9bd0ae5829bcc51a",
+        "android_client_info": {
+          "package_name": "com.ern.klyc.ai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1045104221935-uuc4me5bu0q4o5vop2i1c0fbpbrgme7f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ern.klyc.ai",
+            "certificate_hash": "995351d26db8e1837b9089b4efa75274e98815c0"
+          }
+        },
+        {
+          "client_id": "1045104221935-98ta4uvg9qj8bphg93g00nd3mibjovdr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANAD2kEjcIaq1GFpZFm53r9EvlG3JOQxY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1045104221935-98ta4uvg9qj8bphg93g00nd3mibjovdr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1045104221935-26h2foul7peh8t3qq2ocl3nkh9md02c4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.klyc.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

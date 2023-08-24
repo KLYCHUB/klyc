@@ -93,5 +93,3 @@ final tabIcons = {
   _MyTabViews.ADMIN: Icons.newspaper_outlined,
   _MyTabViews.FAVORITE: Icons.favorite,
 };
-
-

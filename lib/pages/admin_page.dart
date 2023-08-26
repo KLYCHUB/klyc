@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:klyc/AddPhoto/photo.dart';
 import 'package:klyc/components/custom_button.dart';
 import 'package:klyc/components/my_textfield.dart';
 import 'package:klyc/pages/wall_post_admin.dart';
@@ -143,6 +144,8 @@ class _AdminPageState extends State<AdminPage> {
                                   letterSpacing: 2,
                                 ),
                               ),
+                              const SizedBox(height: 30),
+                              const PhotoAdd(),
                               const SizedBox(height: 30),
                               MyTextField(
                                   controller: textController2,

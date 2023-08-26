@@ -131,48 +131,55 @@ class _FirstPageState extends State<FirstPage> {
             ),
           ),
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // the wall
-              Expanded(
-                child: StreamBuilder<QuerySnapshot>(
-                  stream: FirebaseFirestore.instance
-                      .collection("User Post")
-                      .orderBy("TimeStamp", descending: false)
-                      .snapshots(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: snapshot.data!.docs.length,
-                        itemBuilder: (context, index) {
-                          final post = snapshot.data!.docs[index];
-                          return WallPost(
-                            message: post['Message'] ??
-                                "", // Use an empty string if 'Message' is null
-                            user: post['UserEmail'] ??
-                                "", // Use an empty string if 'UserEmail' is null
-                            postId: post.id,
-                            likes: List<String>.from(post['Likes'] ?? []),
-                          );
-                        },
+        body: RefreshIndicator(
+          onRefresh: () async {
+            setState(() {
+              // Your refresh logic here
+            });
+          },
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // the wall
+                Expanded(
+                  child: StreamBuilder<QuerySnapshot>(
+                    stream: FirebaseFirestore.instance
+                        .collection("User Post")
+                        .orderBy("TimeStamp", descending: false)
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return ListView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          itemCount: snapshot.data!.docs.length,
+                          itemBuilder: (context, index) {
+                            final post = snapshot.data!.docs[index];
+                            return WallPost(
+                              message: post['Message'] ??
+                                  "", // Use an empty string if 'Message' is null
+                              user: post['UserEmail'] ??
+                                  "", // Use an empty string if 'UserEmail' is null
+                              postId: post.id,
+                              likes: List<String>.from(post['Likes'] ?? []),
+                            );
+                          },
+                        );
+                      } else if (snapshot.hasError) {
+                        return Center(
+                          child: Text('Error: ${snapshot.error}'),
+                        );
+                      }
+                      return const Center(
+                        child: CircularProgressIndicator(),
                       );
-                    } else if (snapshot.hasError) {
-                      return Center(
-                        child: Text('Error: ${snapshot.error}'),
-                      );
-                    }
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  },
+                    },
+                  ),
                 ),
-              ),
 
-              //Text("Logged in as: ${currentUser.email!}"),
-            ],
+                //Text("Logged in as: ${currentUser.email!}"),
+              ],
+            ),
           ),
         ),
         bottomNavigationBar: const BottomAppBar(

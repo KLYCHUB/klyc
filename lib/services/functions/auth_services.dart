@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -96,27 +95,5 @@ class AuthServices {
       Fluttertoast.showToast(msg: e.message!, toastLength: Toast.LENGTH_LONG);
     }
     return null;
-  }
-
-  Future<UserCredential?> signInWithMicrosoft() async {
-    try {
-      final microsoftProvider = MicrosoftAuthProvider();
-
-      UserCredential userCredential;
-      if (kIsWeb) {
-        userCredential =
-            await FirebaseAuth.instance.signInWithPopup(microsoftProvider);
-      } else {
-        userCredential =
-            await FirebaseAuth.instance.signInWithProvider(microsoftProvider);
-      }
-
-      return userCredential;
-    } catch (e) {
-      if (kDebugMode) {
-        print("Error during Microsoft sign-in: $e");
-      }
-      return null;
-    }
   }
 }

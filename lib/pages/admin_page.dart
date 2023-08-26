@@ -23,6 +23,7 @@ class _AdminPageState extends State<AdminPage> {
 
   // text controller
   final textController2 = TextEditingController();
+  final textController2content = TextEditingController();
 
   // sign user out
   void signOut() {
@@ -54,10 +55,12 @@ class _AdminPageState extends State<AdminPage> {
       'UserEmail2': currentUser2.email,
       'Message2': textController2.text,
       'TimeStamp2': Timestamp.now(),
+      'content': textController2content.text,
     });
 
     setState(() {
       textController2.clear();
+      textController2content.clear();
     });
   }
 
@@ -89,6 +92,7 @@ class _AdminPageState extends State<AdminPage> {
                             message2: post['Message2'] ?? "",
                             user2: post['UserEmail2'] ?? "",
                             postId2: post.id,
+                            content: post['content'] ?? "",
                           );
                         },
                       );
@@ -142,7 +146,12 @@ class _AdminPageState extends State<AdminPage> {
                               const SizedBox(height: 30),
                               MyTextField(
                                   controller: textController2,
-                                  hintText: "Write something on the wall",
+                                  hintText: "BAŞLIK",
+                                  obscureText: false),
+                              const SizedBox(height: 30),
+                              MyTextField(
+                                  controller: textController2content,
+                                  hintText: "AÇIKLAMA",
                                   obscureText: false),
                               const SizedBox(height: 30),
                               CustomButton(

@@ -10,12 +10,14 @@ class WallPostAdmin extends StatefulWidget {
   final String message2;
   final String user2;
   final String postId2;
+  final String content;
 
   const WallPostAdmin({
     Key? key,
     required this.message2,
     required this.user2,
     required this.postId2,
+    required this.content,
   }) : super(key: key);
 
   @override
@@ -127,53 +129,71 @@ class _WallPostState extends State<WallPostAdmin> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      margin: const EdgeInsets.only(top: 25, left: 25, right: 25),
-      padding: const EdgeInsets.all(25),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(width: 10),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          widget.user2.replaceFirst("@gmail.com", ""),
-                          style: const TextStyle(color: Colors.blueGrey),
-                        ),
-                        const Spacer(),
-                        if (widget.user2 == currentUser2.email ||
-                            currentUser2.uid == "EolFFRYgUYTYZiFKQRb5jIX7Ope2")
-                          DeleteButton(onTap: deletePost),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      widget.message2,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 50,
-                      textAlign: TextAlign.left,
-                      style: const TextStyle(
-                        fontSize: 15,
+    return RefreshIndicator(
+      onRefresh: () async {
+        setState(() {});
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        margin: const EdgeInsets.only(top: 25, left: 25, right: 25),
+        padding: const EdgeInsets.all(25),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            widget.user2.replaceFirst("@gmail.com", ""),
+                            style: const TextStyle(color: Colors.blueGrey),
+                          ),
+                          const Spacer(),
+                          if (widget.user2 == currentUser2.email ||
+                              currentUser2.uid ==
+                                  "EolFFRYgUYTYZiFKQRb5jIX7Ope2")
+                            DeleteButton(onTap: deletePost),
+                        ],
                       ),
-                    ),
-                    const SizedBox(height: 10),
-                  ],
+                      const SizedBox(height: 10),
+                      Text(
+                        widget.message2.toUpperCase(),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 3,
+                        textAlign: TextAlign.left,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 18,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        widget.content.toUpperCase(),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 50,
+                        textAlign: TextAlign.left,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

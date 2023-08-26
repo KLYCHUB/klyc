@@ -115,21 +115,6 @@ class _SignInPageState extends State<SignInPage> {
                   const SizedBox(width: 30),
                   InkWell(
                     onTap: () async {
-                      UserCredential? userCredential =
-                          await AuthServices().signInWithMicrosoft();
-                      // signInWithMicrosoft fonksiyonu tarafından dönen userCredential'ı kullanarak işlemleri yapabilirsiniz.
-                      // ignore: unnecessary_null_comparison
-                      if (userCredential != null) {
-                        // Kullanıcı başarılı bir şekilde Microsoft ile giriş yaptı, işlemleri burada yapabilirsiniz.
-                      } else {
-                        // Kullanıcı Microsoft ile giriş yaparken bir hata oluştu.
-                      }
-                    },
-                    child: const SquareTile(imagePath: 'assets/images/mc.png'),
-                  ),
-                  const SizedBox(width: 30),
-                  InkWell(
-                    onTap: () async {
                       User? user = await AuthServices().signInAnonymously();
                       if (user != null) {
                         // ignore: use_build_context_synchronously

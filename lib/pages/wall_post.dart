@@ -331,7 +331,8 @@ class _WallPostState extends State<WallPost> {
                           style: const TextStyle(color: Colors.blueGrey),
                         ),
                         const Spacer(),
-                        if (widget.user == currentUser.email)
+                        if (widget.user == currentUser.email ||
+                            currentUser.uid == "EolFFRYgUYTYZiFKQRb5jIX7Ope2")
                           DeleteButton(onTap: deletePost),
                       ],
                     ),
